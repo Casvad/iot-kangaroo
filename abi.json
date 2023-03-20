@@ -1,0 +1,168 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "deviceId",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "deviceAddress",
+              "type": "address"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct MasterContract.TwinInfo",
+          "name": "twinInfo",
+          "type": "tuple"
+        }
+      ],
+      "name": "DigitalTwinCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "productId",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct MasterContract.ProductTransaction",
+          "name": "productTransaction",
+          "type": "tuple"
+        }
+      ],
+      "name": "ProductTransactionCreated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "devices",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "productTransactions",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "productId",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_deviceId",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_publicKey",
+          "type": "bytes"
+        }
+      ],
+      "name": "createDeviceDigitalTwin",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "deviceId",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "deviceAddress",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct MasterContract.TwinInfo",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_deviceAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_signature",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "createTransaction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

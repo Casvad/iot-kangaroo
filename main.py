@@ -1,16 +1,19 @@
 from datetime import timedelta
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi_login import LoginManager
 from fastapi import Depends
 
 from models.device import Device
+from models.device_transaction import DeviceTransaction
 from models.user import User
 from services.device_service import DeviceService
 from services.user_service import UserService
 
+load_dotenv()
 app = FastAPI()
-SECRET = "c7cc52d136f38be8e8e50b3efa5a828dc699726ff1f870c1"
+SECRET = "c7cc52d136f38be8e8e50b3efa5a828dc699726ff1f870c1" #TODO move to env
 manager = LoginManager(SECRET, token_url='/auth/token')
 userService = UserService()
 deviceService = DeviceService()
@@ -45,6 +48,10 @@ def users_detail(user=Depends(manager)):
 @app.post("/devices")
 def devices_register(device: Device, user=Depends(manager)):
     return deviceService.create_device_for_user(user.email, device)
+
+@app.post("/devices/transaction")
+def devices_register(device: DeviceTransaction, user=Depends(manager)):
+    return deviceService.device_transaction(user.email, device)
 
 
 @app.get("/devices")
