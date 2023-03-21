@@ -8,11 +8,13 @@ class UserRepository:
         self.db = db
 
     def create_user(self, user: DBUser):
-        self.db.add(user)
-        self.db.commit()
-        self.db.refresh(user)
+        db = next(self.db())
+        db.add(user)
+        db.commit()
+        db.refresh(user)
 
         return user
 
     def find_by_email(self, email):
-        return self.db.query(DBUser).filter(DBUser.email == email).first()
+        db = next(self.db())
+        return db.query(DBUser).filter(DBUser.email == email).first()

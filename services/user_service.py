@@ -7,10 +7,12 @@ from repositories.user_repository import UserRepository
 class UserService:
 
     def __init__(self):
-        self.user_repository = UserRepository(get_db())
+        # This could be injected in controller as db: Session = Depends(get_db)
+        self.user_repository = UserRepository(lambda: get_db())
 
     def create_user(self, user: User):
         db_user = DBUser()
+        db_user.id = user.id
         db_user.email = user.email
         db_user.password = user.password
 

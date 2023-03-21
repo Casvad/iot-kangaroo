@@ -8,21 +8,25 @@ class DeviceRepository:
         self.db = db
 
     def create_device(self, device: DBDevice):
-        self.db.add(device)
-        self.db.commit()
-        self.db.refresh(device)
+        db = next(self.db())
+        db.add(device)
+        db.commit()
+        db.refresh(device)
         return device
 
     def update_device(self, device: DBDevice):
-        device_query = self.db.query(DBDevice).filter(DBDevice.id == device.id)
+        db = next(self.db())
+        device_query = db.query(DBDevice).filter(DBDevice.id == device.id)
         device_query.update(device.dict(exclude_unset=True), synchronize_session=False)
-        self.db.commit()
-        self.db.refresh(device)
+        db.commit()
+        db.refresh(device)
 
         return device
 
     def find_by_email(self, email):
-        return self.db.query(DBDevice).filter(DBDevice.email == email).all()
+        db = next(self.db())
+        return db.query(DBDevice).filter(DBDevice.user_email == email).all()
 
     def find_by_device_id(self, device_id):
-        return self.db.query(DBDevice).filter(DBDevice.id == device_id).first()
+        db = next(self.db())
+        return db.query(DBDevice).filter(DBDevice.id == device_id).first()

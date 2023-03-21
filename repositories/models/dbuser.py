@@ -7,8 +7,7 @@ from repositories.base_repository import Base
 
 class DBUser(Base):
     __tablename__ = 'users'
-    id = Column(UUID(as_uuid=True), primary_key=True, nullable=False,
-                default=uuid.uuid4)
+    id = Column(String, primary_key=True, nullable=False,)
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True),
